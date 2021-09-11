@@ -9,7 +9,19 @@ namespace MyClassesTest
     public class FileProcessTest : TestBase
     {
         private const string BAD_FILE_NAME = @"C:\windows\bogus.exe";
-        
+
+        [ClassInitialize()]
+        public static void ClassInitialise(TestContext tc)
+        {
+            //TODO: Intialise for all tests in class
+            tc.WriteLine("In ClassInitialise() method");
+        }
+
+        [ClassCleanup()]
+        public static void ClassCleanUp()
+        {
+            //TODO: Clean up after all tests in class
+        }
 
      
         [TestMethod]

@@ -21,6 +21,7 @@ namespace MyClassesTest
         public static void AssembyCleanup()
         {
             //TODO: Clean up after all tests in an assembly
+            
         }
     }
 }
