@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyClasses;
 using System;
+using System.IO;
 
 namespace MyClassesTest
 {
@@ -28,10 +29,21 @@ namespace MyClassesTest
             bool fromCall;
 
             SetGoodFileName();
+            if (!string.IsNullOrEmpty(_GoodFileName))
+            {
+                //Create a file
+                File.AppendAllText(_GoodFileName, "Hello world");
+            }
             //Act - invoke method to test
             //@ symbol: tell compiler not to deal with 
             TestContext.WriteLine(@"Checking File " + _GoodFileName);
             fromCall = fp.FileExists(_GoodFileName);
+
+            //Delete the file
+            if (File.Exists(_GoodFileName))
+            {
+                File.Delete(_GoodFileName);
+            }
 
             //Assert
             Assert.IsTrue(fromCall);
