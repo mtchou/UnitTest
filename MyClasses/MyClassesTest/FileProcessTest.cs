@@ -23,7 +23,41 @@ namespace MyClassesTest
             //TODO: Clean up after all tests in class
         }
 
-     
+        //Test Initialise and Test Clean Up will be run for EVERY [TestMethod]
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            TestContext.WriteLine("In the TestInitialise() method");
+
+            if (TestContext.TestName.StartsWith("FileNameDoesExist"))
+            {
+                SetGoodFileName();
+                if (!string.IsNullOrEmpty(_GoodFileName))
+                {
+                    TestContext.WriteLine(@"Create File " + _GoodFileName);
+                    //Create a file
+                    File.AppendAllText(_GoodFileName, "Hello world");
+                }
+
+            }
+
+        }
+
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            TestContext.WriteLine("In the TestCleanUp() method");
+            if (TestContext.TestName.StartsWith("FileNameDoesExist"))
+            {
+                TestContext.WriteLine(@"Delete File " + _GoodFileName);
+                //Delete the file
+                if (File.Exists(_GoodFileName))
+                {
+                    File.Delete(_GoodFileName);
+                }
+            }
+        }
+
         [TestMethod]
         public void FileNameDoesExist()
         {
@@ -31,22 +65,12 @@ namespace MyClassesTest
             FileProcess fp = new FileProcess();
             bool fromCall;
 
-            SetGoodFileName();
-            if (!string.IsNullOrEmpty(_GoodFileName))
-            {
-                //Create a file
-                File.AppendAllText(_GoodFileName, "Hello world");
-            }
+
+            TestContext.WriteLine(@"Checking file: " + _GoodFileName);
             //Act - invoke method to test
             //@ symbol: tell compiler not to deal with 
-            TestContext.WriteLine(@"Checking File " + _GoodFileName);
             fromCall = fp.FileExists(_GoodFileName);
 
-            //Delete the file
-            if (File.Exists(_GoodFileName))
-            {
-                File.Delete(_GoodFileName);
-            }
 
             //Assert
             Assert.IsTrue(fromCall);
