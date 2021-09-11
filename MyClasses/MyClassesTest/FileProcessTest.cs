@@ -7,6 +7,9 @@ namespace MyClassesTest
     [TestClass]
     public class FileProcessTest
     {
+        private const string BAD_FILE_NAME = @"C:\windows\bogus.exe";
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void FileNameDoesExist()
         {
@@ -15,7 +18,8 @@ namespace MyClassesTest
             bool fromCall;
 
             //Act - invoke method to test
-            //@ symbol: tell compiler not to deal with /
+            //@ symbol: tell compiler not to deal with 
+            TestContext.WriteLine(@"Checking File C:\windows\regedit.exe");
             fromCall = fp.FileExists(@"C:\windows\regedit.exe");
 
             //Assert
@@ -32,8 +36,9 @@ namespace MyClassesTest
             bool fromCall;
 
             //Act - invoke method to test
-            //@ symbol: tell compiler not to deal with /
-            fromCall = fp.FileExists(@"C:\windows\bogus.exe");
+            //@ symbol: tell compiler not to deal with 
+            TestContext.WriteLine(@"Checking File " + BAD_FILE_NAME);
+            fromCall = fp.FileExists(BAD_FILE_NAME);
 
             //Assert
             Assert.IsFalse(fromCall);
@@ -45,6 +50,7 @@ namespace MyClassesTest
         {
             FileProcess fp = new FileProcess();
 
+            TestContext.WriteLine(@"Checking for a null file (ArgumentNullException)");
             fp.FileExists("");
 
         }
@@ -56,6 +62,7 @@ namespace MyClassesTest
 
             try
             {
+                TestContext.WriteLine(@"Checking for a null file (TryCatch)");
                 fp.FileExists("");
             }
             catch (ArgumentNullException)
