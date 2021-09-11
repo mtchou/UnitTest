@@ -7,8 +7,18 @@ namespace MyClassesTest
     [TestClass]
     public class FileProcessTest
     {
+        protected string _GoodFileName;
         private const string BAD_FILE_NAME = @"C:\windows\bogus.exe";
         public TestContext TestContext { get; set; }
+
+        protected void SetGoodFileName()
+        {
+            _GoodFileName = TestContext.Properties["GoodFileName"].ToString();
+            if (_GoodFileName.Contains("[AppPath]")) {
+                _GoodFileName = _GoodFileName.Replace("[AppPath]", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            }
+
+        }
 
         [TestMethod]
         public void FileNameDoesExist()
@@ -17,10 +27,11 @@ namespace MyClassesTest
             FileProcess fp = new FileProcess();
             bool fromCall;
 
+            SetGoodFileName();
             //Act - invoke method to test
             //@ symbol: tell compiler not to deal with 
-            TestContext.WriteLine(@"Checking File C:\windows\regedit.exe");
-            fromCall = fp.FileExists(@"C:\windows\regedit.exe");
+            TestContext.WriteLine(@"Checking File " + _GoodFileName);
+            fromCall = fp.FileExists(_GoodFileName);
 
             //Assert
             Assert.IsTrue(fromCall);
