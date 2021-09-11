@@ -6,21 +6,12 @@ using System.IO;
 namespace MyClassesTest
 {
     [TestClass]
-    public class FileProcessTest
+    public class FileProcessTest : TestBase
     {
-        protected string _GoodFileName;
         private const string BAD_FILE_NAME = @"C:\windows\bogus.exe";
-        public TestContext TestContext { get; set; }
+        
 
-        protected void SetGoodFileName()
-        {
-            _GoodFileName = TestContext.Properties["GoodFileName"].ToString();
-            if (_GoodFileName.Contains("[AppPath]")) {
-                _GoodFileName = _GoodFileName.Replace("[AppPath]", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            }
-
-        }
-
+     
         [TestMethod]
         public void FileNameDoesExist()
         {
