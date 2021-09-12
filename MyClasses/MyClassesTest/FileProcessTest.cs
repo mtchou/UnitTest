@@ -61,6 +61,9 @@ namespace MyClassesTest
 
         [TestMethod]
         [Description("Check to see if a file name exist.")]
+        [Owner("Mandy")]
+        [Priority(1)]
+        [TestCategory("No Exception")]
         public void FileNameDoesExist()
         {
             //Arrange - initial variable
@@ -81,7 +84,9 @@ namespace MyClassesTest
 
         [TestMethod]
         [Description("Check to see if a file name does not exist.")]
-
+        [Owner("Mandy")]
+        [Priority(2)]
+        [TestCategory("No Exception")]
         public void FileNameDoesNotExist()
         {
 
@@ -101,7 +106,9 @@ namespace MyClassesTest
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         [Description("Check for an throw ArgumentNullException using ExpectedException.")]
-
+        [Owner("Goat")]
+        [Priority(3)]
+        [TestCategory("Exception")]
         public void FileNameNullOrEmpty_UsingAttribute()
         {
             FileProcess fp = new FileProcess();
@@ -113,7 +120,9 @@ namespace MyClassesTest
 
         [TestMethod]
         [Description("Check for an throw ArgumentNullException using try catch.")]
-
+        [Owner("Goat")]
+        [Priority(3)]
+        [TestCategory("Exception")]
         public void FileNameNullOrEmpty_UsingTryCatch()
         {
             FileProcess fp = new FileProcess();
