@@ -28,6 +28,7 @@ namespace MyClassesTest
         public void TestInitialise()
         {
             TestContext.WriteLine("In the TestInitialise() method");
+            WriteDescription(this.GetType());
 
             if (TestContext.TestName.StartsWith("FileNameDoesExist"))
             {
@@ -59,6 +60,7 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Description("Check to see if a file name exist.")]
         public void FileNameDoesExist()
         {
             //Arrange - initial variable
@@ -78,6 +80,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Description("Check to see if a file name does not exist.")]
+
         public void FileNameDoesNotExist()
         {
 
@@ -96,6 +100,8 @@ namespace MyClassesTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
+        [Description("Check for an throw ArgumentNullException using ExpectedException.")]
+
         public void FileNameNullOrEmpty_UsingAttribute()
         {
             FileProcess fp = new FileProcess();
@@ -106,6 +112,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Description("Check for an throw ArgumentNullException using try catch.")]
+
         public void FileNameNullOrEmpty_UsingTryCatch()
         {
             FileProcess fp = new FileProcess();
