@@ -64,6 +64,7 @@ namespace MyClassesTest
         [Owner("Mandy")]
         [Priority(1)]
         [TestCategory("No Exception")]
+        //[Ignore]
         public void FileNameDoesExist()
         {
             //Arrange - initial variable
@@ -80,6 +81,13 @@ namespace MyClassesTest
             //Assert
             Assert.IsTrue(fromCall);
             //Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        [Timeout(3000)]
+        public void SimulateTimeout()
+        {
+            System.Threading.Thread.Sleep(4000); //4000 m-sec
         }
 
         [TestMethod]
