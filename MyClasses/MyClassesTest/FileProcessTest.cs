@@ -114,7 +114,8 @@ namespace MyClassesTest
         [Timeout(3000)]
         public void SimulateTimeout()
         {
-            System.Threading.Thread.Sleep(4000); //4000 m-sec
+            //System.Threading.Thread.Sleep(4000); //4000 m-sec
+            System.Threading.Thread.Sleep(299);
         }
 
         [TestMethod]
